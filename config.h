@@ -2,7 +2,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 5;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -18,14 +18,18 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char col_palet1[]      = "#4a0709"; /* dark  red */
+static const char col_palet2[]      = "#ed3125"; /* red */
+static const char col_palet3[]      = "#e9e8ed"; /* bright white */
+static const char col_palet4[]      = "#c6ccd8"; /* darky white */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan, col_cyan  },
+	[SchemeNorm] = { col_palet1, col_palet4, col_palet3},
+	[SchemeSel]  = { col_palet1, col_palet3, col_palet2  },
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -35,7 +39,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Spotify",  NULL,       NULL,       1 << 7,       0,           -1 },
+	{ NULL,       NULL,"Spotify Premium", 1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
