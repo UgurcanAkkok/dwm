@@ -270,6 +270,8 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 
+static void autostart(void);
+
 /* variables */
 static Systray *systray =  NULL;
 static const char broken[] = "broken";
@@ -1547,6 +1549,11 @@ run(void)
 			handler[ev.type](&ev); /* call handler */
 }
 
+
+static void autostart(void){
+    system("zsh -c \" cd ~/.bin/; ./startdwm \"");
+}
+
 void
 scan(void)
 {
@@ -2502,6 +2509,7 @@ main(int argc, char *argv[])
 		die("pledge");
 #endif /* __OpenBSD__ */
 	scan();
+    autostart();
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
