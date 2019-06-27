@@ -125,8 +125,8 @@ static Key keys[] = {
     {ShiftMask,        XF86XK_MonBrightnessUp,     spawn,      SHCMD("backlight -i 1")  },
     {0,                XF86XK_MonBrightnessDown,   spawn,      SHCMD("backlight -d 10")  },
     {ShiftMask,      XF86XK_MonBrightnessDown,     spawn,      SHCMD("backlight -d 1")  },
-    {0,                 XF86XK_AudioLowerVolume,   spawn,      SHCMD("pamixer -i 10")  },
-    {0,                 XF86XK_AudioRaiseVolume,   spawn,      SHCMD("pamixer -d 10")  },
+    {0,                 XF86XK_AudioLowerVolume,   spawn,      SHCMD("pamixer -d 10")  },
+    {0,                 XF86XK_AudioRaiseVolume,   spawn,      SHCMD("pamixer -i 10")  },
     {0,                    XF86XK_AudioMute,       spawn,      SHCMD("pamixer -t")  },
     {0,                  XF86XK_AudioMicMute,      spawn,      SHCMD("pamixer --source 1 -t")                    },
     {MODKEY|ShiftMask,              XK_e,          spawn,      SHCMD("echo 'shutdown now' | dask 'Shutdown ?'")  }
