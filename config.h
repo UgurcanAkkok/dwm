@@ -1,8 +1,8 @@
-#include "shortcuts.h"
+#include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -21,11 +21,11 @@ static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan, col_cyan  },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -62,7 +62,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/zsh", "-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -112,24 +112,24 @@ static Key keys[] = {
 	{ MODKEY,                       XK_c,      quit,           {0} },
 
     /* My shortcuts */
-    {MODKEY|ShiftMask,              XK_s,          SHCMD,          {.v = cmdlist[0]} }, /* slock */
-    {MODKEY|ShiftMask,              XK_h,          SHCMD,          {.v = cmdlist[2]} }, /* htop */
-    {MODKEY|ShiftMask,              XK_r,          SHCMD,          {.v = cmdlist[3]} }, /* ranger */
-    {MODKEY|ShiftMask,              XK_f,          SHCMD,          {.v = cmdlist[4]} }, /* firefox */
-    {MODKEY                         XK_Print,      SHCMD,          {.v = cmdlist[5]} }, /* screenshot */
-    {MODKEY|ShiftMask,              XK_p,          SHCMD,          {.v = cmdlist[6]} }, /* demoji */
-    {MODKEY|ShiftMask,              XK_z,          SHCMD,          {.v = cmdlist[7]} }, /* player prev. */
-    {MODKEY|ShiftMask,              XK_x,          SHCMD,          {.v = cmdlist[8]} }, /* player play-pause */
-    {MODKEY|ShiftMask,              XK_c,          SHCMD,          {.v = cmdlist[9]} }, /* player next */
-    {MODKEY               XF86XK_MonBrightnessUp,  SHCMD,          {.v = cmdlist[10]} }, /* backlight up */
-    {MODKEY|ShiftMask,    XF86XK_MonBrightnessUp,  SHCMD,          {.v = cmdlist[11]} },
-    {MODKEY             XF86XK_MonBrightnessDow    SHCMD,          {.v = cmdlist[12]} },
-    {MODKEY|ShiftMask,  XF86XK_MonBrightnessDown,  SHCMD,          {.v = cmdlist[13]} },
-    {MODKEY              XF86XK_AudioLowerVolume,  SHCMD,          {.v = cmdlist[14]} },
-    {MODKEY              XF86XK_AudioRaiseVolume,  SHCMD,          {.v = cmdlist[15]} },
-    {MODKEY                 XF86XK_AudioMute       SHCMD,          {.v = cmdlist[16]} },
-    {MODKEY|ShiftMask,      XF86XK_AudioMicMute,   SHCMD,          {.v = cmdlist[17]} },
-    {MODKEY|ShiftMask,              XK_e,          SHCMD,          {.v = cmdlist[18]} },
+    {MODKEY|ShiftMask,              XK_s,          spawn,      SHCMD("slock") }, 
+    {MODKEY|ShiftMask,              XK_h,          spawn,      SHCMD("st -e htop") }, 
+    {MODKEY|ShiftMask,              XK_r,          spawn,      SHCMD("st -e ranger") }, 
+    {MODKEY|ShiftMask,              XK_f,          spawn,      SHCMD("firefox") }, 
+    {MODKEY,                        XK_Print,      spawn,      SHCMD("screenshot") }, 
+    {MODKEY|ShiftMask,              XK_p,          spawn,      SHCMD("demoji") }, 
+    {MODKEY|ShiftMask,              XK_z,          spawn,      SHCMD("playerctl previous") }, 
+    {MODKEY|ShiftMask,              XK_x,          spawn,      SHCMD("playerctl play-pause") }, 
+    {MODKEY|ShiftMask,              XK_c,          spawn,      SHCMD("playerctl next") }, 
+    {0,                  XF86XK_MonBrightnessUp,   spawn,      SHCMD("backlight -i 10")  }, 
+    {ShiftMask,        XF86XK_MonBrightnessUp,     spawn,      SHCMD("backlight -i 1")  },
+    {0,                XF86XK_MonBrightnessDown,   spawn,      SHCMD("backlight -d 10")  },
+    {ShiftMask,      XF86XK_MonBrightnessDown,     spawn,      SHCMD("backlight -d 1")  },
+    {0,                 XF86XK_AudioLowerVolume,   spawn,      SHCMD("pamixer -i 10")  },
+    {0,                 XF86XK_AudioRaiseVolume,   spawn,      SHCMD("pamixer -d 10")  },
+    {0,                    XF86XK_AudioMute,       spawn,      SHCMD("pamixer -t")  },
+    {0,                  XF86XK_AudioMicMute,      spawn,      SHCMD("pamixer --source 1 -t")                    },
+    {MODKEY|ShiftMask,              XK_e,          spawn,      SHCMD("echo 'shutdown now' | dask 'Shutdown ?'")  }
 };
 
 /* button definitions */
