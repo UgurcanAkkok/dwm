@@ -29,7 +29,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -40,6 +40,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ NULL,       NULL,"Spotify Premium", 1 << 7,       0,           -1 },
+	{ NULL,       NULL,   "WhatsApp",     1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
@@ -113,7 +114,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY,                       XK_c,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
 
     /* My shortcuts */
     {MODKEY|ShiftMask,              XK_s,          spawn,      SHCMD("slock") }, 
@@ -122,9 +123,9 @@ static Key keys[] = {
     {MODKEY|ShiftMask,              XK_f,          spawn,      SHCMD("firefox") }, 
     {MODKEY,                        XK_Print,      spawn,      SHCMD("screenshot") }, 
     {MODKEY|ShiftMask,              XK_p,          spawn,      SHCMD("demoji") }, 
-    {MODKEY|ShiftMask,              XK_z,          spawn,      SHCMD("playerctl previous") }, 
-    {MODKEY|ShiftMask,              XK_x,          spawn,      SHCMD("playerctl play-pause") }, 
-    {MODKEY|ShiftMask,              XK_c,          spawn,      SHCMD("playerctl next") }, 
+    {MODKEY,                        XK_z,          spawn,      SHCMD("playerctl previous") }, 
+    {MODKEY,                        XK_x,          spawn,      SHCMD("playerctl play-pause") }, 
+    {MODKEY,                        XK_c,          spawn,      SHCMD("playerctl next") }, 
     {0,                  XF86XK_MonBrightnessUp,   spawn,      SHCMD("backlight -i 10")  }, 
     {ShiftMask,        XF86XK_MonBrightnessUp,     spawn,      SHCMD("backlight -i 1")  },
     {0,                XF86XK_MonBrightnessDown,   spawn,      SHCMD("backlight -d 10")  },
