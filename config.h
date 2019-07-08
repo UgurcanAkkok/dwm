@@ -29,7 +29,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -77,7 +77,7 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	/*{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },*/
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -117,6 +117,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
 
     /* My shortcuts */
+    {MODKEY,                        XK_d,          spawn,      SHCMD("dmenu_run") }, 
     {MODKEY|ShiftMask,              XK_s,          spawn,      SHCMD("slock") }, 
     {MODKEY|ShiftMask,              XK_h,          spawn,      SHCMD("st -e htop") }, 
     {MODKEY|ShiftMask,              XK_r,          spawn,      SHCMD("st -e ranger") }, 
