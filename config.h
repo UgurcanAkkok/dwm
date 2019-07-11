@@ -3,7 +3,6 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -39,8 +38,6 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ NULL,       NULL,"Spotify Premium", 1 << 7,       0,           -1 },
-	{ NULL,       NULL,   "WhatsApp",     1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
@@ -102,9 +99,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_Down,  setgaps,        {.i = -1 } },
-	{ MODKEY,                       XK_Up,  setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = 0  } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -118,7 +112,8 @@ static Key keys[] = {
 
     /* My shortcuts */
     {MODKEY,                        XK_d,          spawn,      SHCMD("dmenu_run") }, 
-    {MODKEY|ShiftMask,              XK_s,          spawn,      SHCMD("slock") }, 
+    {MODKEY|ShiftMask,              XK_s,          spawn,      SHCMD("spotify") }, 
+    {MODKEY|ShiftMask,              XK_l,          spawn,      SHCMD("slock") }, 
     {MODKEY|ShiftMask,              XK_h,          spawn,      SHCMD("st -e htop") }, 
     {MODKEY|ShiftMask,              XK_r,          spawn,      SHCMD("st -e ranger") }, 
     {MODKEY|ShiftMask,              XK_f,          spawn,      SHCMD("firefox") }, 
