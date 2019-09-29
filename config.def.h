@@ -18,10 +18,12 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-static const char col_palet1[]      = "#4a0709"; /* dark  red */
-static const char col_palet2[]      = "#ed3125"; /* red */
-static const char col_palet3[]      = "#e9e8ed"; /* bright white */
-static const char col_palet4[]      = "#c6ccd8"; /* darky white */
+
+static const char col_palet1[]      = "#6a6a6a"; /* bright gray */
+static const char col_palet2[]      = "#fefefe"; /* white */
+static const char col_palet3[]      = "#3e3e3e"; /* gray */
+static const char col_palet4[]      = "#181818"; /* black */
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_palet1, col_palet4, col_palet3},
@@ -29,7 +31,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "⭐", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -42,7 +44,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.6; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -84,6 +86,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
@@ -114,11 +119,11 @@ static Key keys[] = {
     /* My shortcuts */
     {MODKEY,                        XK_d,          spawn,      SHCMD("dmenu_run") }, 
     {MODKEY|ShiftMask,              XK_s,          spawn,      SHCMD("spotify") }, 
-    {MODKEY|ShiftMask,              XK_l,          spawn,      SHCMD("slock") }, 
-    {MODKEY|ShiftMask,              XK_h,          spawn,      SHCMD("st -e htop") }, 
+    {MODKEY|ControlMask,            XK_l,          spawn,      SHCMD("slock systemctl hybrid-sleep") }, 
+    /*{MODKEY|ShiftMask,              XK_h,          spawn,      SHCMD("st -e htop") }, */
     {MODKEY|ShiftMask,              XK_r,          spawn,      SHCMD("st -e ranger") }, 
     {MODKEY|ShiftMask,              XK_f,          spawn,      SHCMD("firefox") }, 
-    {MODKEY,                        XK_Print,      spawn,      SHCMD("screenshot") }, 
+    {0,                             XK_Print,      spawn,      SHCMD("screenshot") }, 
     {MODKEY|ShiftMask,              XK_p,          spawn,      SHCMD("demoji") }, 
     {MODKEY,                        XK_z,          spawn,      SHCMD("playerctl previous") }, 
     {MODKEY,                        XK_x,          spawn,      SHCMD("playerctl play-pause") }, 
@@ -131,7 +136,7 @@ static Key keys[] = {
     {0,                 XF86XK_AudioRaiseVolume,   spawn,      SHCMD("pamixer -i 10")  },
     {0,                    XF86XK_AudioMute,       spawn,      SHCMD("pamixer -t")  },
     {0,                  XF86XK_AudioMicMute,      spawn,      SHCMD("pamixer --source 1 -t")                    },
-    {MODKEY|ShiftMask,              XK_e,          spawn,      SHCMD("echo 'shutdown now' | dask 'Shutdown ?'")  }
+    {MODKEY|ControlMask,            XK_e,          spawn,      SHCMD("echo 'shutdown now' | dask 'Shutdown ?'")  }
 };
 
 /* button definitions */
