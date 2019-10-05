@@ -3,7 +3,6 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -19,19 +18,20 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 
-static const char col_palet1[]      = "#6a6a6a"; /* bright gray */
+static const char col_palet1[]      = "#c6ccd8"; /* dead white */
 static const char col_palet2[]      = "#fefefe"; /* white */
-static const char col_palet3[]      = "#3e3e3e"; /* gray */
-static const char col_palet4[]      = "#181818"; /* black */
+static const char col_palet3[]      = "#5195b9"; /* blue */
+static const char col_palet4[]      = "#15fa9e"; /* sunshine green */
+static const char col_palet5[]      = "#263240"; /* space blue */
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_palet1, col_palet4, col_palet3},
-	[SchemeSel]  = { col_palet1, col_palet3, col_palet2  },
+	[SchemeNorm] = { col_palet1, col_palet5, col_palet2},
+	[SchemeSel]  = { col_palet4, col_palet5, col_palet4},
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "⭐", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -39,8 +39,11 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "Gimp",     NULL,       NULL,       1 << 5,       0,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Spotify",  NULL,       NULL,       1 << 7,       0,           -1 },
+	{ "Zathura",  NULL,       NULL,       1 << 2,       0,           -1 },
+	{ NULL,       NULL,   "ranger",       1 << 3,       0,           -1 },
 };
 
 /* layout(s) */
@@ -114,13 +117,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
 
     /* My shortcuts */
     {MODKEY,                        XK_d,          spawn,      SHCMD("dmenu_run") }, 
     {MODKEY|ShiftMask,              XK_s,          spawn,      SHCMD("spotify") }, 
-    {MODKEY|ControlMask,            XK_l,          spawn,      SHCMD("slock systemctl hybrid-sleep") }, 
-    /*{MODKEY|ShiftMask,              XK_h,          spawn,      SHCMD("st -e htop") }, */
+    {MODKEY|ControlMask,            XK_l,          spawn,      SHCMD("slock") }, 
     {MODKEY|ShiftMask,              XK_r,          spawn,      SHCMD("st -e ranger") }, 
     {MODKEY|ShiftMask,              XK_f,          spawn,      SHCMD("firefox") }, 
     {0,                             XK_Print,      spawn,      SHCMD("screenshot") }, 
@@ -135,7 +136,7 @@ static Key keys[] = {
     {0,                 XF86XK_AudioLowerVolume,   spawn,      SHCMD("pamixer -d 10")  },
     {0,                 XF86XK_AudioRaiseVolume,   spawn,      SHCMD("pamixer -i 10")  },
     {0,                    XF86XK_AudioMute,       spawn,      SHCMD("pamixer -t")  },
-    {0,                  XF86XK_AudioMicMute,      spawn,      SHCMD("pamixer --source 1 -t")                    },
+    {0,                  XF86XK_AudioMicMute,      spawn,      SHCMD("pamixer --source 1 -t") },
     {MODKEY|ControlMask,            XK_e,          spawn,      SHCMD("echo 'shutdown now' | dask 'Shutdown ?'")  }
 };
 
